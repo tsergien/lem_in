@@ -14,31 +14,31 @@
 
 int			is_existing_name(t_room *rooms, char *line)
 {
-	int		flag1;
-	int		flag2;
+	int		flag;
+	t_room	*tmp;
 	int		len;
 
-	flag1 = 0;
-	flag2 = 0;
+	flag = 0;
 	len = 1;
-	while (rooms)
+	tmp = rooms;
+	while (tmp)
 	{
-		if (ft_strstr(line, rooms->name) == line)
+		if (ft_strstr(line, tmp->name) == line)
 		{
-			len += ft_strlen(rooms->name);
-			flag1 = 1;
+			len += ft_strlen(tmp->name);
+			flag += 1;
 		}
-		else if (ft_strstr(line, rooms->name) != line &&
-		ft_strstr(line, rooms->name) != 0)
+		else if (ft_strstr(line, tmp->name) != line &&
+		ft_strstr(line, tmp->name) != 0)
 		{
-			len += ft_strlen(rooms->name);
-			flag2 = 1;
+			len += ft_strlen(tmp->name);
+			flag += 2;
 		}
-		rooms = rooms->next;
+		tmp = tmp->next;
 	}
 	if ((size_t)len != ft_strlen(line))
 		return (0);
-	return (((flag1 == 1 && flag2 == 1) ? 1 : 0));
+	return ((flag == 3 ? 1 : 0));
 }
 
 int			no_sol_error(void)
